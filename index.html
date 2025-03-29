@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carambolo Sound Library</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="sequencer">
+        <div class="controls">
+            <div class="transport-controls">
+                <button id="playPause"><img src="/assets/playButton.svg"></button>
+                <button id="clear"><img src="/assets/clearButton.svg"></button>
+                <select id="demos">
+                    <option value="">Load Demo</option>
+                    <option value="demo1">Basic Beat</option>
+                    <option value="demo2">House Pattern</option>
+                </select>
+            </div>
+            <div id="bpm">
+                <label>BPM</label>
+                <input type="number" id="bpm" value="120" min="60" max="200">
+            </div>
+            <div id="volume">
+                <label>Volume </label>
+                <input type="range" id="masterVolume" min="0" max="100" oninput="progressScript()">
+            </div>
+            <div class="file-controls">
+                <button id="save"><img src="/assets/saveButton.svg"></button>
+                <button id="share"><img src="/assets/shareButton.svg"></button>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid" id="sequencerGrid"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+/*
+1. Use intuitive box sizing model
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/*
+2. Remove default margin
+*/
+* {
+    margin: 0;
+}
+
+/*
+3. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/*
+4. Remove built-in typography styles
+*/
+input, button, textarea, select {
+    font: inherit;
+}
+
+
+body {
+    font-family: "Lexend", sans-serif;
+    font-size: 0.75em;
+    color: #FFFFFF;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #001021;
+    line-height: 1.5;
+}
+
+button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #357abd;
+}
+
+.sequencer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #373737;
+    padding: 20px;
+    border: 0.5px solid #8F8F8F;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+}
+
+.controls {
+    display: flex;
+    background: #373737;
+    gap: 1.75em;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 0.75em;
+    border-radius: 6px;
+}
+
+.transport-controls {
+    display: flex;
+    align-items: center;
+}
+
+.transport-controls,
+.file-controls {
+    display: flex;
+    gap: 1.5em;
+}
+
+.transport-controls button,
+.file-controls button,
+.mute-btn {
+    padding: 0;
+}
+
+.transport-controls #demos {
+    height: 100%;
+}
+
+#bpm label,
+#volume label {
+    font-size: 1.25em;
+    margin-right: 0.5em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 200px repeat(12, 1fr);
+    gap: .85em;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 0px 0px 8px 8px;
+    background: #282828;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25) inset;
+}
+
+.grid-header {
+    font-size: 1.5em;
+}
+
+.channel-controls {
+    display: flex;
+    align-items: center;
+    padding: 1.25em;
+    gap: 1.25em;
+}
+
+.beat {
+    aspect-ratio: 1;
+    background: #4B5D70;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.beat:hover,
+.beat.playing {
+    background: #8196AB;
+}
+
+.beat.active {
+    background: rgb(232,242,180);
+    background: radial-gradient(circle, rgba(232,242,180,1) 0%, rgba(215,233,119,1) 100%);
+    box-shadow: 0 0 7px #F7FFCB;
+}
+
+.channel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+select,
+input[type="number"] {
+    padding: 0.75em;
+    border: 1px solid #8F8F8F;
+    background-color: #161616;
+    color: #45E3FF;
+}
+
+input[type="number"] {
+    width: 5em;
+}
+
+
+/*
+Volume slider
+*/
+
+/* #volume {
+    display: inline flex
+} */
+
+input[type="range"] {
+    /* Remove default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* Create custon design */
+    cursor: pointer;
+    outline: none;
+}
+
+/* Track */
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 15px;
+    border: 1px solid #8F8F8F;
+    background: linear-gradient(180deg, #333 -12.5%, #686868 116.67%);
+
+}
+  
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+    height: 15px;
+    border: 1px solid #8F8F8F;
+    background: linear-gradient(180deg, #333 -12.5%, #686868 116.67%);
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    height: 30px;
+    width: 30px;
+    transform: translate(0, -25%);
+    background: conic-gradient(from 180deg at 50% 50%, #D9D9D9 36deg, #8F8F8F 124deg, #D9D9D9 163deg, #737373 206deg, #CFCFCF 304deg, #828282 336deg, #D9D9D9 359deg);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+    height: 30px;
+    width: 30px;
+    transform: translate(0, -25%);
+    background: conic-gradient(from 180deg at 50% 50%, #D9D9D9 36deg, #8F8F8F 124deg, #D9D9D9 163deg, #737373 206deg, #CFCFCF 304deg, #828282 336deg, #D9D9D9 359deg);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+/* Hover, active & focus Thumb: Webkit */
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);
+}
+input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);
+}
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);
+}
+  
+  /* Hover, active & focus Thumb: Firfox */
+  
+input[type="range"]::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);
+}
+input[type="range"]:active::-moz-range-thumb {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);
+}
+input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 6px rgba(69,227,255, .2);  
+}
