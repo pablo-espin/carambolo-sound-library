@@ -126,7 +126,7 @@ document.getElementById('playPause').onclick = async () => {
         Tone.Transport.stop();
         seq.stop();
         isPlaying = false;
-        document.getElementById('playPause').innerHTML = '<img src="/assets/playButton.svg">';
+        document.getElementById('playPause').innerHTML = '<img src="assets/playButton.svg">';
         // Clear playing indicators
         document.querySelectorAll('.beat.playing').forEach(el => {
             el.classList.remove('playing');
@@ -135,7 +135,7 @@ document.getElementById('playPause').onclick = async () => {
         Tone.Transport.start();
         seq.start();
         isPlaying = true;
-        document.getElementById('playPause').innerHTML = '<img src="/assets/pauseButton.svg">';
+        document.getElementById('playPause').innerHTML = '<img src="assets/pauseButton.svg">';
     }
 };
 
@@ -174,9 +174,9 @@ document.querySelectorAll('.mute-btn').forEach(btn => {
         e.target.classList.toggle('muted');
         
         if (e.target.classList.contains('muted')) {
-            img.src = '/assets/muteButton.svg';
+            img.src = 'assets/muteButton.svg';
         } else {
-            img.src = '/assets/soundOnButton.svg';
+            img.src = 'assets/soundOnButton.svg';
         }
     };
 });
@@ -286,7 +286,7 @@ document.getElementById('playPause').onclick = async () => {
     Tone.Transport.stop();
     seq.stop();
     isPlaying = false;
-    document.getElementById('playPause').innerHTML = '<img src="/assets/playButton.svg">';
+    document.getElementById('playPause').innerHTML = '<img src="assets/playButton.svg">';
     // Clear playing indicators
     document.querySelectorAll('.beat.playing').forEach(el => {
       el.classList.remove('playing');
@@ -301,7 +301,7 @@ document.getElementById('playPause').onclick = async () => {
     Tone.Transport.start();
     seq.start();
     isPlaying = true;
-    document.getElementById('playPause').innerHTML = '<img src="/assets/pauseButton.svg">';
+    document.getElementById('playPause').innerHTML = '<img src="assets/pauseButton.svg">';
   }
 };
 
