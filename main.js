@@ -119,24 +119,29 @@ const seq = new Tone.Sequence((time, step) => {
     });
 }, Array.from({length: steps}, (_, i) => i), "8n");
 
-// Transport controls
 document.getElementById('playPause').onclick = async () => {
-    await Tone.start();
-    if (isPlaying) {
-        Tone.Transport.stop();
-        seq.stop();
-        isPlaying = false;
-        document.getElementById('playPause').innerHTML = '<img src="assets/playButton.svg">';
-        // Clear playing indicators
-        document.querySelectorAll('.beat.playing').forEach(el => {
-            el.classList.remove('playing');
-        });
-    } else {
-        Tone.Transport.start();
-        seq.start();
-        isPlaying = true;
-        document.getElementById('playPause').innerHTML = '<img src="assets/pauseButton.svg">';
-    }
+  await Tone.start();
+  if (isPlaying) {
+    Tone.Transport.stop();
+    seq.stop();
+    isPlaying = false;
+    document.getElementById('playPause').innerHTML = '<img src="assets/playButton.svg">';
+    // Clear playing indicators
+    document.querySelectorAll('.beat.playing').forEach(el => {
+      el.classList.remove('playing');
+    });
+    
+    // Stop recording when stopping playback
+    stopRecording();
+  } else {
+    // Start recording when starting playback
+    startRecording();
+    
+    Tone.Transport.start();
+    seq.start();
+    isPlaying = true;
+    document.getElementById('playPause').innerHTML = '<img src="assets/pauseButton.svg">';
+  }
 };
 
 // Clear button
@@ -151,7 +156,25 @@ document.getElementById('clear').onclick = () => {
 
 // BPM control
 document.getElementById('bpm').onchange = (e) => {
-    Tone.Transport.bpm.value = e.target.value;
+  // Set limits
+  const minBPM = 10;
+  const maxBPM = 500;
+
+  // Get the value and ensure it's a number
+  let bpmValue = parseInt(e.target.value, 10);
+
+  // Apply limits
+  if (isNaN(bpmValue) || bpmValue < minBPM) {
+    bpmValue = minBPM;
+  } else if (bpmValue > maxBPM) {
+    bpmValue = maxBPM;
+  }
+
+  // Update the input element with the validated value
+  e.target.value = bpmValue;
+
+  // Set the Tone.js BPM
+  Tone.Transport.bpm.value = bpmValue;
 };
 
 // Master volume
@@ -277,33 +300,6 @@ function shareToSocial() {
   .then(() => console.log('Shared successfully'))
   .catch((error) => console.error('Error sharing:', error));
 }
-
-// Modify your existing play button handler to start recording when playing
-// Update your existing playPause function with this version
-document.getElementById('playPause').onclick = async () => {
-  await Tone.start();
-  if (isPlaying) {
-    Tone.Transport.stop();
-    seq.stop();
-    isPlaying = false;
-    document.getElementById('playPause').innerHTML = '<img src="assets/playButton.svg">';
-    // Clear playing indicators
-    document.querySelectorAll('.beat.playing').forEach(el => {
-      el.classList.remove('playing');
-    });
-    
-    // Stop recording when stopping playback
-    stopRecording();
-  } else {
-    // Start recording when starting playback
-    startRecording();
-    
-    Tone.Transport.start();
-    seq.start();
-    isPlaying = true;
-    document.getElementById('playPause').innerHTML = '<img src="assets/pauseButton.svg">';
-  }
-};
 
 // Add event listeners for save and share buttons
 document.getElementById('save').onclick = saveRecording;
